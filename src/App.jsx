@@ -2,8 +2,8 @@
 import {  useState } from 'react'
 
 //內部檔案
-
 function App() {
+  
   const [tempProduct, setTempProduct] = useState({});
   const products =[
     {
@@ -60,66 +60,60 @@ function App() {
       ]
     }
   ]
-
+  
   return (
     <div className="container">
-          <h2>產品列表</h2>
-          <table className="table table-primary table-hover">
-            <thead>
-              <tr>
-                <th>#</th>
-                <th>產品名稱</th>
-                <th>原價</th>
-                <th>售價</th>
-                <th>是否啟用</th>
-                <th>查看細節</th>
-              </tr>
-            </thead>
-            <tbody >
-              {
-              products.map((product) => {
-                return (<tr key={product.id}>
-                  <th scope="row">{product.itemNum}</th>
-                  <td>{product.title}</td>
-                  <td>{product.origin_price}</td>
-                  <td>{product.price}</td>
-                  <td>{product.is_enabled ? '啟用':'未啟用'}</td>
-                  <td>
-                    <button type="button" className="btn btn-primary" data-bs-toggle="modal" data-bs-target="#itemDetail" onClick={()=>{
-                      setTempProduct(product)
-                    }}>查看細節</button>
-                  </td>
-                </tr>)
-              })
-              }
-            </tbody>
-          </table>
-          <div>
-            {tempProduct.title ?(<div className="modal fade" id="itemDetail" tabIndex="-1" >
-              <div className="modal-dialog modal-dialog-centered modal-dialog-scrollable">
-                <div className="modal-content">
-                  <div className="modal-header">
-                    <h1 className="modal-title fs-5" id="exampleModalLabel">{tempProduct.title} <span className="badge text-bg-secondary">{tempProduct.category}</span></h1>
-                    <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                  </div>
-                  <div className="modal-body">
-                    <img className="img-fluid" src={tempProduct.imageUrl} alt={tempProduct.title} />
-                    <p>商品描述：{tempProduct.description}</p>
-                    <p>商品內容：{tempProduct.content}</p>
-                    <p><del>{tempProduct.origin_price}</del> / {tempProduct.price}</p>
-                    <h4>更多圖片</h4>
-                    {tempProduct.imagesUrl?.map((image,index)=>{
-                      return <img className="img-fluid" key={index} src={image} alt="" />
+          <div className="row mt-4">
+            <div className="col-6">
+              <h2>產品列表</h2>
+              <table className="table table-primary table-hover">
+                <thead>
+                  <tr>
+                    <th>#</th>
+                    <th>產品名稱</th>
+                    <th>原價</th>
+                    <th>售價</th>
+                    <th>是否啟用</th>
+                    <th>查看細節</th>
+                  </tr>
+                </thead>
+                <tbody >
+                  {
+                  products.map((product) => {
+                    return (<tr key={product.id}>
+                      <th scope="row">{product.itemNum}</th>
+                      <td>{product.title}</td>
+                      <td>{product.origin_price}</td>
+                      <td>{product.price}</td>
+                      <td>{product.is_enabled ? '啟用':'未啟用'}</td>
+                      <td>
+                        <button type="button" className="btn btn-primary" onClick={()=>{
+                          setTempProduct(product)
+                        }}>查看細節</button>
+                      </td>
+                    </tr>)
+                  })
+                  }
+                </tbody>
+              </table>
+            </div>
+            <div className="col-6">
+              <h2 className="text-center">單一產品細節</h2>
+              {tempProduct.title ?(
+                <div className="card">
+                  <img src={tempProduct.imageUrl} className="card-img-top img-fluid" alt={tempProduct.imageUrl}></img>
+                  <div className="card-body">
+                    <h3 className="card-title">{tempProduct.title} <span className="badge text-bg-warning rounded-pill ">{tempProduct.category}</span></h3>
+                    <p className="card-text fs-5">產品描述：{tempProduct.description}</p>
+                    <p className="card-text fs-5">產品尺寸：{tempProduct.content}</p>
+                    <hr />
+                    <h3 className="card-title">更多圖片</h3>
+                    {tempProduct.imagesUrl ?.map((image,index)=>{
+                      return <img key={index} src={image} alt={image} className="img-fluid"></img>
                     })}
                   </div>
-                  <div className="modal-footer">
-                    <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                  </div>
-                </div>
-              </div>
-            </div>) : <p className="h3 text-center">請點選產品</p>}
-
-            
+              </div>) : <p className="h3 text-center">請點選產品查看</p>}
+            </div>
           </div>
     </div>
   );
