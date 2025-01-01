@@ -1,8 +1,8 @@
-# React + Vite
+# React Week1
+這是React 課程的第一週主線任務
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## 學習內容
 
-Currently, two official plugins are available:
-
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- 關注點分離
+- 設計模式
+- React 初始化
